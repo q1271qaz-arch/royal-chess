@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Игроки онлайн{% endblock %}
+{% block content %}
+<section class="page-heading">
+    <p class="eyebrow">ОНЛАЙН-ШАХМАТЫ</p>
+    <h1>Игроки и приглашения</h1>
+    <p>
+        Подготовлена система приглашений. Полная синхронная партия
+        подключается через Socket.IO на следующем этапе.
+    </p>
+</section>
+
+{% if incoming %}
+<section class="content-card">
+    <h2>Входящие приглашения</h2>
+    <div class="player-grid">
+        {% for invite in incoming %}
+        <article class="player-card">
+            <div class="avatar small-avatar">
+                {{ invite.sender.username[0]|upper }}
+            </div>
+            <div>
+                <strong>{{ invite.sender.username }}</strong>
+                <p>Рейтинг: {{ invite.sender.rating }}</p>
+            </div>
+            <form
+                method="post"
+                action="{{ url_for('online.decline', invite_id=invite.id) }}"
+            >
+                <button class="button danger small" type="submit">
+                    Отклонить
+                </button>
+            </form>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<section class="content-card">
+    <h2>Все игроки</h2>
+    <div class="player-grid">
+        {% for player in players %}
+        <article class="player-card">
+            <div class="avatar small-avatar">
+                {{ player.username[0]|upper }}
+            </div>
+            <div class="player-info">
+                <strong>{{ player.username }}</strong>
+                <p>Рейтинг: {{ player.rating }}</p>
+            </div>
+            <form
+                method="post"
+                action="{{ url_for('online.invite', user_id=player.id) }}"
+            >
+                <button class="button small" type="submit">
+                    Пригласить
+                </button>
+            </form>
+        </article>
+        {% else %}
+        <p>Других игроков пока нет.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

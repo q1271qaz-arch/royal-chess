@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Рейтинг игроков{% endblock %}
+{% block content %}
+<section class="page-heading">
+    <p class="eyebrow">ОБЩИЙ РЕЙТИНГ</p>
+    <h1>Таблица лидеров</h1>
+</section>
+
+<section class="content-card">
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Место</th>
+                    <th>Игрок</th>
+                    <th>Рейтинг</th>
+                    <th>Победы</th>
+                    <th>Партии</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in players %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ player.username }}</td>
+                    <td><strong>{{ player.rating }}</strong></td>
+                    <td>{{ player.wins }}</td>
+                    <td>{{ player.games_count }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">Игроков пока нет.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

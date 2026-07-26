@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>{% block title %}Royal Chess{% endblock %}</title>
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/chess.css') }}"
+    >
+</head>
+<body>
+<header class="site-header">
+    <a class="brand" href="{{ url_for('main.index') }}">
+        <span class="brand-mark">♚</span>
+        <span>Royal Chess</span>
+    </a>
+
+    <nav class="nav">
+        <a href="{{ url_for('main.index') }}">Главная</a>
+        <a href="{{ url_for('main.leaderboard') }}">Рейтинг</a>
+
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('game.play_bot') }}">Играть с ботом</a>
+            <a href="{{ url_for('online.players') }}">Игроки</a>
+            <a href="{{ url_for('main.profile') }}">Кабинет</a>
+            <a href="{{ url_for('auth.logout') }}">Выйти</a>
+        {% else %}
+            <a href="{{ url_for('auth.login') }}">Войти</a>
+            <a class="nav-button" href="{{ url_for('auth.register') }}">
+                Регистрация
+            </a>
+        {% endif %}
+    </nav>
+</header>
+
+<main class="page-shell">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="footer">
+    Royal Chess — шахматы с ботом и онлайн-режимом
+</footer>
+
+{% block scripts %}{% endblock %}
+</body>
+</html>

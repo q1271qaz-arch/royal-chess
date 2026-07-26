@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Вход{% endblock %}
+{% block content %}
+<section class="auth-card">
+    <p class="eyebrow">ЛИЧНЫЙ КАБИНЕТ</p>
+    <h1>Вход в аккаунт</h1>
+    <form method="post" class="form">
+        <label>
+            Электронная почта
+            <input type="email" name="email" required>
+        </label>
+        <label>
+            Пароль
+            <input type="password" name="password" required>
+        </label>
+        <button class="button primary" type="submit">Войти</button>
+    </form>
+</section>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}Игра с ботом{% endblock %}
+
+{% block content %}
+<section class="game-layout">
+
+    <div class="game-main">
+
+        <div class="board-header">
+            <div>
+                <p class="eyebrow">ИГРА ПРОТИВ БОТА</p>
+                <h1>Шахматная партия</h1>
+            </div>
+
+            <div id="gameStatus" class="status-pill">
+                Выберите настройки и начните игру
+            </div>
+        </div>
+
+        <div class="board-wrapper">
+            <div id="chessBoard"></div>
+        </div>
+
+        <p class="board-help">
+            Перетащите фигуру мышкой на нужную клетку.
+        </p>
+
+    </div>
+
+    <aside class="game-panel">
+
+        <h2>Настройки</h2>
+
+        <label>
+            Уровень сложности
+
+            <select id="levelSelect">
+                <option value="1">1 — Новичок</option>
+                <option value="2" selected>2 — Лёгкий</option>
+                <option value="3">3 — Средний</option>
+                <option value="4">4 — Сложный</option>
+                <option value="5">5 — Эксперт</option>
+            </select>
+        </label>
+
+        <label>
+            Цвет фигур
+
+            <select id="colorSelect">
+                <option value="white">Белые</option>
+                <option value="black">Чёрные</option>
+            </select>
+        </label>
+
+        <button
+            id="newGameButton"
+            class="button primary"
+            type="button"
+        >
+            Начать новую игру
+        </button>
+
+        <div class="game-information">
+
+            <div class="information-row">
+                <span>Номер партии</span>
+                <strong id="gameNumber">—</strong>
+            </div>
+
+            <div class="information-row">
+                <span>Ваш цвет</span>
+                <strong id="playerColor">—</strong>
+            </div>
+
+            <div class="information-row">
+                <span>Уровень</span>
+                <strong id="currentLevel">—</strong>
+            </div>
+
+        </div>
+
+        <div class="move-history-block">
+            <h3>История ходов</h3>
+
+            <div id="moveHistory" class="move-history">
+                Партия ещё не началась.
+            </div>
+        </div>
+
+    </aside>
+
+</section>
+{% endblock %}
+
+{% block scripts %}
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css"
+>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chess.js@0.10.3/chess.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+
+<script src="{{ url_for('static', filename='js/bot-game.js') }}"></script>
+
+{% endblock %}
