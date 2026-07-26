@@ -6,7 +6,6 @@
   },
   "deploy": {
     "aptPackages": [
-      "...",
       "stockfish"
     ],
     "startCommand": "gunicorn --worker-class eventlet -w 1 app:app",
